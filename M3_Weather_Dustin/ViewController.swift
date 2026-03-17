@@ -53,8 +53,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let weather = "Sunny"
-        let temperature = 72
+        let weather = ["Sunny", "Snowy", "Rainy", "Cloudy"].randomElement() ?? "Weather"
+        let temperature = Int.random(in: 0...100)
         
         //Set Labels
         statusLabel.text = weather
