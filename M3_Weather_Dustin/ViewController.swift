@@ -14,6 +14,42 @@ class ViewController: UIViewController {
     @IBOutlet var background: UIView!
     @IBOutlet weak var messageLabel: UILabel!
     
+    func getWeatherImage(matching weather: String) -> UIImage?
+    {
+        switch weather
+        {
+            case "Sunny":
+                return UIImage(named: "sunny")
+            case "Cloudy":
+                return UIImage(named: "cloudy")
+            case "Raining":
+                return UIImage(named: "rainy")
+            case "Snowing":
+                return UIImage(named: "snowy")
+            default:
+                return UIImage(named: "weather")
+        }
+    }
+    
+    func getTemperature(matching temp: Int) -> String
+    {
+        switch temp
+        {
+            case ..<20:
+                return "Extremely Cold"
+            case 20...49:
+                return "Cold"
+            case 50...68:
+                return "Cool and mild"
+            case 69...85:
+                return "Hot"
+            case 86...:
+                return "Extremely Hot"
+            default :
+                return ""
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,42 +60,10 @@ class ViewController: UIViewController {
         statusLabel.text = weather
         temperatureLabel.text = "\(temperature)°F"
         
-        //Set Image
-        switch weather
-        {
-            case "Sunny":
-                ImageView.image = UIImage(named: "sunny")
-                background.backgroundColor = UIColor.yellow
-            case "Cloudy":
-                ImageView.image = UIImage(named: "cloudy")
-                background.backgroundColor = UIColor.gray
-            case "Raining":
-                ImageView.image = UIImage(named: "rainy")
-            background.backgroundColor = UIColor.systemTeal
-            case "Snowing":
-                ImageView.image = UIImage(named: "snowy")
-            background.backgroundColor = UIColor.white
-            default:
-                ImageView.image = UIImage(named: "weather")
-                statusLabel.text = "Unknown"
-                temperatureLabel.text = "N/A"
-        }
-        
-        switch temperature
-        {
-            case ..<20:
-            messageLabel.text = "Extremely Cold"
-            case 20...49:
-            messageLabel.text = "Cold"
-            case 50...68:
-            messageLabel.text = "Cool and mild"
-            case 69...85:
-            messageLabel.text = "Hot"
-            case 86...:
-            messageLabel.text = "Extremely Hot"
-            default :
-            messageLabel.text = ""
-        }
+        //get Image
+        ImageView.image = getWeatherImage(matching: weather)
+        //get Temperature
+        messageLabel.text = getTemperature(matching: temperature)
     }
 }
 
